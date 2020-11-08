@@ -2,6 +2,7 @@
 using System.Linq;
 using Yuenov_SDK;
 using Yuenov_SDK.Enums;
+using Yuenov_SDK.Models.Share;
 
 namespace Yuenov_ConsoleApp
 {
@@ -14,7 +15,10 @@ namespace Yuenov_ConsoleApp
             Console.WriteLine("欢迎使用Yuenov测试命令行程序");
             //SearchBook();
             //GetDiscoveryPage();
-            GetTotalCateories();
+            //GetTotalCateories();
+            //GetTotalRanks();
+            //GetRankDetail();
+            GetEndBooks();
             Console.ReadKey();
         }
 
@@ -31,14 +35,7 @@ namespace Yuenov_ConsoleApp
                     var list = response.Data.List;
                     foreach (var book in list)
                     {
-                        string status = Convert.ToBoolean(book.IsBookFinish()) ? "已完结" : "连载中";
-                        Console.WriteLine($"书名：{book.Title}\n" +
-                            $"作者：{book.Author}\n" +
-                            $"简介：{book.Description}\n" +
-                            $"分类：{book.CategoryName}\n" +
-                            $"字数：{book.Word}\n" +
-                            $"状态：{status}\n" +
-                            $"-----------");
+                        WriteBook(book);
                     }
                 }
             }
@@ -47,6 +44,18 @@ namespace Yuenov_ConsoleApp
                 ErrorHandle(ex.Message);
             }
 
+        }
+
+        static void WriteBook(Book book)
+        {
+            string status = Convert.ToBoolean(book.IsBookFinish()) ? "已完结" : "连载中";
+            Console.WriteLine($"书名：{book.Title}\n" +
+                $"作者：{book.Author}\n" +
+                $"简介：{book.Description}\n" +
+                $"分类：{book.CategoryName}\n" +
+                $"字数：{book.Word}\n" +
+                $"状态：{status}\n" +
+                $"\n-----------\n");
         }
 
         static async void GetDiscoveryPage()
@@ -77,7 +86,7 @@ namespace Yuenov_ConsoleApp
 
         static async void GetTotalCateories()
         {
-            Console.WriteLine("正在获取全部分类数据...");
+            Console.WriteLine("正在获取全部分类数据...\n");
             try
             {
                 var data = await _client.GetTotalCategoriesAsync();
@@ -97,7 +106,7 @@ namespace Yuenov_ConsoleApp
                             {
                                 Console.WriteLine($"· {pic}");
                             }
-                            Console.WriteLine("********");
+                            Console.WriteLine("\n********\n");
                         }
                     }
                 }
@@ -105,6 +114,87 @@ namespace Yuenov_ConsoleApp
             catch (Exception ex)
             {
                 ErrorHandle(ex.Message);
+            }
+        }
+
+        static async void GetTotalRanks()
+        {
+            Console.WriteLine("正在获取全部榜单数据...\n");
+            try
+            {
+                var data = await _client.GetTotalRanksAsync();
+                if (data.Result.Code == ResultCode.Success)
+                {
+                    foreach (var item in data.Data.Channels)
+                    {
+                        Console.WriteLine($"频道名：{item.ChannelName}\n" +
+                            $"频道号：{item.ChannelId}\n" +
+                            $"--------------\n");
+                        foreach (var cate in item.Ranks)
+                        {
+                            Console.WriteLine($"榜单名：{cate.RankName}\n" +
+                                $"榜单号：{cate.RankId}\n" +
+                                $"榜单图片：\n");
+                            foreach (var pic in cate.CoverImgs)
+                            {
+                                Console.WriteLine($"· {pic}");
+                            }
+                            Console.WriteLine("\n********\n");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
+            }
+        }
+
+        static async void GetRankDetail()
+        {
+            Console.WriteLine("正在获取男生-热搜榜数据...\n");
+            try
+            {
+                var data = await _client.GetRankDetailAsync(1, 101, 1, 5);
+                if(data!=null && data.Result.Code == ResultCode.Success)
+                {
+                    foreach (var book in data.Data.List)
+                    {
+                        WriteBook(book);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
+                throw;
+            }
+        }
+
+        static async void GetEndBooks()
+        {
+            Console.WriteLine("正在获取完本榜数据...\n");
+            try
+            {
+                var data = await _client.GetEndBooksAsync();
+                if (data != null && data.Result.Code == ResultCode.Success)
+                {
+                    foreach (var item in data.Data.List)
+                    {
+                        Console.WriteLine($"分类名称：{item.CategoryName}\n" +
+                            $"分类数据号：{item.CategoryId}\n" +
+                            $"---------\n");
+                        foreach (var book in item.BookList)
+                        {
+                            WriteBook(book);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
+                throw;
             }
         }
 

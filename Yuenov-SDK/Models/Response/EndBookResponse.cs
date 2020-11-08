@@ -1,15 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using Yuenov_SDK.Models.Share;
+using Yuenov_SDK.Models.Discovery;
 
 namespace Yuenov_SDK.Models.Response
 {
-    public class SearchBookResponse : PageResponseBase
+    public class EndBookResponse:PageResponseBase
     {
         /// <summary>
-        /// 搜索的结果书籍列表
+        /// 全部完结书籍的分类列表
         /// </summary>
         [JsonProperty("list")]
-        public List<Book> List { get; set; }
+        public List<EndBookContainer> List { get; set; }
     }
 }

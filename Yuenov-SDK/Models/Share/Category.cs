@@ -18,7 +18,7 @@ namespace Yuenov_SDK.Models.Share
         public string CategoryName { get; set; }
 
         /// <summary>
-        /// 分类的封面列表，包含该分类排名前三书籍的封面URL
+        /// 分类的封面列表，包含该分类排名前三书籍的封面路径
         /// </summary>
         [JsonProperty("coverImgs")]
         public List<string> CoverImgs { get; set; }

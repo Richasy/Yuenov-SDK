@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Yuenov_SDK.Models.Share;
 
-namespace Yuenov_SDK.Models.Discovery
+namespace Yuenov_SDK.Models.Response
 {
     public class ChannelResponse
     {

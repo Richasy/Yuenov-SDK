@@ -38,7 +38,7 @@ namespace Yuenov_SDK.Models.Share
         public string ChapterStatus { get; set; }
 
         /// <summary>
-        /// 书籍的封面地址（这里是URL地址）
+        /// 书籍的封面路径
         /// </summary>
         [JsonProperty("coverImg")]
         public string CoverImg { get; set; }

@@ -84,6 +84,11 @@ namespace Yuenov_SDK
             return JsonConvert.DeserializeObject<T>(result);
         }
 
+        public string GetImageUrl(string path)
+        {
+            return _picUrl + path;
+        }
+
         /// <summary>
         /// 批量检查书籍是否有更新API
         /// </summary>
@@ -114,6 +119,30 @@ namespace Yuenov_SDK
         private string API_TOTAL_CATEGORIES
         {
             get => _baseUrl + _baseRoute + "/category/getCategoryChannel";
+        }
+
+        /// <summary>
+        /// 全部榜单API
+        /// </summary>
+        private string API_TOTAL_RANKS
+        {
+            get => _baseUrl + _baseRoute + "/rank/getList";
+        }
+
+        /// <summary>
+        /// 榜单详情API
+        /// </summary>
+        private string API_RANK_DETAIL
+        {
+            get => _baseUrl + _baseRoute + "/rank/getPage";
+        }
+
+        /// <summary>
+        /// 完本书籍API
+        /// </summary>
+        private string API_END_BOOK
+        {
+            get => _baseUrl + _baseRoute + "/category/getCategoryEnd";
         }
     }
 }
