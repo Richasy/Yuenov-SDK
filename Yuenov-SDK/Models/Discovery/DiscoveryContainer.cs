@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using Yuenov_SDK.Enums;
-using Yuenov_SDK.Models.Share;
+using Yuenov.SDK.Enums;
+using Yuenov.SDK.Models.Share;
 
-namespace Yuenov_SDK.Models.Discovery
+namespace Yuenov.SDK.Models.Discovery
 {
     public class DiscoveryContainer
     {

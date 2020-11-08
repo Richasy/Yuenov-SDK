@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
-using Yuenov_SDK;
-using Yuenov_SDK.Enums;
-using Yuenov_SDK.Models.Share;
+using Yuenov.SDK;
+using Yuenov.SDK.Enums;
+using Yuenov.SDK.Models.Share;
 
 namespace Yuenov_ConsoleApp
 {

@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using Yuenov_SDK.Models.Share;
+using Yuenov.SDK.Models.Share;
 
-namespace Yuenov_SDK.Models.Response
+namespace Yuenov.SDK.Models.Response
 {
     public class BookListPageResponse : PageResponseBase
     {

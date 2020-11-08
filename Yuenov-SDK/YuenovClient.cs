@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Yuenov_SDK
+namespace Yuenov.SDK
 {
     public partial class YuenovClient
     {

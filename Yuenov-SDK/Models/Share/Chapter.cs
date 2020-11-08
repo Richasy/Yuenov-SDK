@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Yuenov_SDK.Models.Share
+namespace Yuenov.SDK.Models.Share
 {
     public class Chapter
     {

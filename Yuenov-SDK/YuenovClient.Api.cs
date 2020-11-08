@@ -1,4 +1,4 @@
-﻿namespace Yuenov_SDK
+﻿namespace Yuenov.SDK
 {
     public partial class YuenovClient
     {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Yuenov_SDK.Enums;
-using Yuenov_SDK.Models.Response;
-using Yuenov_SDK.Models.Store;
+using Yuenov.SDK.Enums;
+using Yuenov.SDK.Models.Response;
+using Yuenov.SDK.Models.Store;
 
-namespace Yuenov_SDK
+namespace Yuenov.SDK
 {
     public partial class YuenovClient
     {

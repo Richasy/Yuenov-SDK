@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Yuenov_SDK.Enums;
-using Yuenov_SDK.Models.Response;
+using Yuenov.SDK.Enums;
+using Yuenov.SDK.Models.Response;
 
-namespace Yuenov_SDK
+namespace Yuenov.SDK
 {
     public partial class YuenovClient
     {

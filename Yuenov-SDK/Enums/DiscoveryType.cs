@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Yuenov_SDK.Enums
+namespace Yuenov.SDK.Enums
 {
     public enum DiscoveryType
     {

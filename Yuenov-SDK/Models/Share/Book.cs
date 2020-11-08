@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using Yuenov_SDK.Enums;
+using Yuenov.SDK.Enums;
 
-namespace Yuenov_SDK.Models.Share
+namespace Yuenov.SDK.Models.Share
 {
     public class Book
     {

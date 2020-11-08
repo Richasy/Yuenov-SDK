@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Yuenov_SDK.Models.Share
+namespace Yuenov.SDK.Models.Share
 {
     public class Rank
     {

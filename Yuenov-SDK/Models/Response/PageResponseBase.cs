@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Yuenov_SDK.Models.Response
+namespace Yuenov.SDK.Models.Response
 {
     public class PageResponseBase
     {

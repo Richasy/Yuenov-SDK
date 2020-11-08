@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Yuenov_SDK.Enums;
+using Yuenov.SDK.Enums;
 
-namespace Yuenov_SDK.Models.Response
+namespace Yuenov.SDK.Models.Response
 {
     public class Response<T>
     {

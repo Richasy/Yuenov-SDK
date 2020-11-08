@@ -2,11 +2,32 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Yuenov_SDK</RootNamespace>
+    <RootNamespace>Yuenov.SDK</RootNamespace>
+    <Authors>Richasy</Authors>
+    <Description>基于阅小说的公开API创建的.NET SDK</Description>
+    <Product>Yuenov</Product>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Richasy/Yuenov-SDK</PackageProjectUrl>
+    <PackageId>Richasy.Yuenov.Sdk</PackageId>
+    <PackageIcon>Yuenov_icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Richasy/Yuenov-SDK</RepositoryUrl>
+    <RepositoryType></RepositoryType>
+    <PackageTags>yuenov, richasy, book, reader</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Assets\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="Assets\Yuenov_icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

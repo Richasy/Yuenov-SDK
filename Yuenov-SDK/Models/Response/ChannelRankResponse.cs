@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using Yuenov_SDK.Models.Discovery;
+using Yuenov.SDK.Models.Discovery;
 
-namespace Yuenov_SDK.Models.Response
+namespace Yuenov.SDK.Models.Response
 {
     public class ChannelRankResponse
     {

@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using Yuenov_SDK.Enums;
+using Yuenov.SDK.Enums;
 
-namespace Yuenov_SDK.Models.Store
+namespace Yuenov.SDK.Models.Store
 {
     public class BookUpdateInfo
     {

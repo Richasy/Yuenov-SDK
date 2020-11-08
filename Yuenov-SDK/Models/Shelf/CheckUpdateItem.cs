@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Yuenov_SDK.Models.Shelf
+namespace Yuenov.SDK.Models.Shelf
 {
     public class CheckUpdateItem
     {
