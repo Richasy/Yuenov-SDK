@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Yuenov.SDK
 {
-    public partial class YuenovClient
+    public partial class YuenovClient : IDisposable
     {
         private static string _baseUrl;
         private static string _picUrl;
@@ -26,13 +26,14 @@ namespace Yuenov.SDK
             _baseUrl = "http://yuenov.com:15555";
             _picUrl = "http://pt.yuenov.com:15555";
             _httpClient = new HttpClient();
+            _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
         }
 
         /// <summary>
         /// 创建Yuenov客户端实例
         /// </summary>
         /// <param name="baseProtocal">指定端口</param>
-        public YuenovClient(string baseProtocal) : this()
+        public YuenovClient(int baseProtocal) : this()
         {
             _baseUrl = $"http://yuenov.com:{baseProtocal}";
             _picUrl = $"http://pt.yuenov.com:{baseProtocal}";
@@ -88,6 +89,19 @@ namespace Yuenov.SDK
         }
 
         /// <summary>
+        /// 预热（降低第一次连接时的等待时间，可以在应用启动时调用）
+        /// </summary>
+        /// <returns></returns>
+        public async Task WarmUpAsync()
+        {
+            await _httpClient.SendAsync(new HttpRequestMessage
+            {
+                Method = new HttpMethod("HEAD"),
+                RequestUri = new Uri(_baseUrl)
+            });
+        }
+
+        /// <summary>
         /// 获取图片地址
         /// </summary>
         /// <param name="path">图片路径</param>
@@ -110,6 +124,15 @@ namespace Yuenov.SDK
                     .SingleOrDefault(x => x.Name == @enum.ToString())
                     ?.GetCustomAttribute<EnumMemberAttribute>(false)
                     ?.Value;
+        }
+
+        /// <summary>
+        /// 释放客户端
+        /// </summary>
+        public void Dispose()
+        {
+            _httpClient.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

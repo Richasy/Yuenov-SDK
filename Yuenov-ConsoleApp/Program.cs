@@ -39,7 +39,7 @@ namespace Yuenov_ConsoleApp
             try
             {
                 Console.WriteLine("正在获取书籍数据...");
-                var response = await _client.SearchBookAsync(keyword, 1, 5);
+                var response = await _client.SearchBookAsync(keyword: keyword, pageNum: 1, pageSize: 5);
                 if (response != null && response.Result.Code == ResultCode.Success)
                 {
                     var list = response.Data.List;
