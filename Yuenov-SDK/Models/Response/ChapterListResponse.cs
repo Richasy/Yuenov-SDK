@@ -4,12 +4,9 @@ using Yuenov_SDK.Models.Share;
 
 namespace Yuenov_SDK.Models.Response
 {
-    public class RankResponse : PageResponseBase
+    public class ChapterListResponse
     {
-        /// <summary>
-        /// 榜单书籍列表
-        /// </summary>
         [JsonProperty("list")]
-        public List<Book> List { get; set; }
+        public List<ChapterDetail> List { get; set; }
     }
 }

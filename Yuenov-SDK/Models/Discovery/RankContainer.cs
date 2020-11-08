@@ -4,7 +4,7 @@ using Yuenov_SDK.Models.Share;
 
 namespace Yuenov_SDK.Models.Discovery
 {
-    public class ChannelRank
+    public class RankContainer
     {
         /// <summary>
         /// 榜单信息列表

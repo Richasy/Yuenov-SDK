@@ -1,8 +1,11 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -84,65 +87,29 @@ namespace Yuenov_SDK
             return JsonConvert.DeserializeObject<T>(result);
         }
 
+        /// <summary>
+        /// 获取图片地址
+        /// </summary>
+        /// <param name="path">图片路径</param>
+        /// <returns></returns>
         public string GetImageUrl(string path)
         {
             return _picUrl + path;
         }
 
         /// <summary>
-        /// 批量检查书籍是否有更新API
+        /// 获取枚举定义的对应值
         /// </summary>
-        private string API_CHECK_UPDATE
+        /// <param name="enum">枚举</param>
+        /// <returns></returns>
+        internal string GetEnumMemberValue(Enum @enum)
         {
-            get => _baseUrl + _baseRoute + "/book/checkUpdate";
-        }
-
-        /// <summary>
-        /// 搜索书籍API
-        /// </summary>
-        private string API_SEARCH_BOOK
-        {
-            get => _baseUrl + _baseRoute + "/book/search";
-        }
-
-        /// <summary>
-        /// 发现页面API
-        /// </summary>
-        private string API_DISCOVERY_PAGE
-        {
-            get => _baseUrl + _baseRoute + "/category/discovery";
-        }
-
-        /// <summary>
-        /// 全部分类API
-        /// </summary>
-        private string API_TOTAL_CATEGORIES
-        {
-            get => _baseUrl + _baseRoute + "/category/getCategoryChannel";
-        }
-
-        /// <summary>
-        /// 全部榜单API
-        /// </summary>
-        private string API_TOTAL_RANKS
-        {
-            get => _baseUrl + _baseRoute + "/rank/getList";
-        }
-
-        /// <summary>
-        /// 榜单详情API
-        /// </summary>
-        private string API_RANK_DETAIL
-        {
-            get => _baseUrl + _baseRoute + "/rank/getPage";
-        }
-
-        /// <summary>
-        /// 完本书籍API
-        /// </summary>
-        private string API_END_BOOK
-        {
-            get => _baseUrl + _baseRoute + "/category/getCategoryEnd";
+            return @enum.GetType()
+                    .GetTypeInfo()
+                    .DeclaredMembers
+                    .SingleOrDefault(x => x.Name == @enum.ToString())
+                    ?.GetCustomAttribute<EnumMemberAttribute>(false)
+                    ?.Value;
         }
     }
 }

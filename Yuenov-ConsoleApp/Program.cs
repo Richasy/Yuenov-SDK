@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using Yuenov_SDK;
 using Yuenov_SDK.Enums;
@@ -8,6 +9,9 @@ namespace Yuenov_ConsoleApp
 {
     class Program
     {
+        /**
+         * 这里只是一些简单的测试，包含一些基础的调用
+         */
         static YuenovClient _client;
         static void Main(string[] args)
         {
@@ -18,7 +22,13 @@ namespace Yuenov_ConsoleApp
             //GetTotalCateories();
             //GetTotalRanks();
             //GetRankDetail();
-            GetEndBooks();
+            //GetEndBooks();
+            //GetSpecialList();
+            //GetSpecialDetail();
+            //GetDiscoveryDetail();
+            //GetBookDetail();
+            //GetBookChapters();
+            GetChapterContent();
             Console.ReadKey();
         }
 
@@ -48,8 +58,9 @@ namespace Yuenov_ConsoleApp
 
         static void WriteBook(Book book)
         {
-            string status = Convert.ToBoolean(book.IsBookFinish()) ? "已完结" : "连载中";
+            string status = Convert.ToBoolean(book.ChapterStatus == ChapterStatus.End) ? "已完结" : "连载中";
             Console.WriteLine($"书名：{book.Title}\n" +
+                $"书号：{book.BookId}\n" +
                 $"作者：{book.Author}\n" +
                 $"简介：{book.Description}\n" +
                 $"分类：{book.CategoryName}\n" +
@@ -81,7 +92,7 @@ namespace Yuenov_ConsoleApp
             {
                 ErrorHandle(ex.Message);
             }
-            
+
         }
 
         static async void GetTotalCateories()
@@ -156,7 +167,7 @@ namespace Yuenov_ConsoleApp
             try
             {
                 var data = await _client.GetRankDetailAsync(1, 101, 1, 5);
-                if(data!=null && data.Result.Code == ResultCode.Success)
+                if (data != null && data.Result.Code == ResultCode.Success)
                 {
                     foreach (var book in data.Data.List)
                     {
@@ -195,6 +206,155 @@ namespace Yuenov_ConsoleApp
             {
                 ErrorHandle(ex.Message);
                 throw;
+            }
+        }
+
+        static async void GetSpecialList()
+        {
+            Console.WriteLine("正在获取专题数据...\n");
+            try
+            {
+                var data = await _client.GetAllSpecialListAsync();
+                if (data != null && data.Result.Code == ResultCode.Success)
+                {
+                    foreach (var item in data.Data.SpecialList)
+                    {
+                        Console.WriteLine($"专题名称：{item.Name}\n" +
+                            $"专题号：{item.Id}\n" +
+                            $"---------\n");
+                        foreach (var book in item.BookList)
+                        {
+                            WriteBook(book);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
+                throw;
+            }
+        }
+
+        static async void GetSpecialDetail()
+        {
+            Console.WriteLine("正在获取书友专题数据...\n");
+            try
+            {
+                var data = await _client.GetSpecialDetailAsync(17, 1, 5);
+                if (data != null && data.Result.Code == ResultCode.Success)
+                {
+                    foreach (var item in data.Data.List)
+                    {
+                        WriteBook(item);
+                    }
+                    Console.WriteLine($"\n总条目数：{data.Data.Total}");
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
+                throw;
+            }
+        }
+
+        static async void GetDiscoveryDetail()
+        {
+            Console.WriteLine("正在获取玄幻分类数据...\n");
+            try
+            {
+                var data = await _client.GetDiscoveryDetailAsync(DiscoveryType.Category, 1, 5, 1);
+                if (data != null && data.Result.Code == ResultCode.Success)
+                {
+                    foreach (var item in data.Data.List)
+                    {
+                        WriteBook(item);
+                    }
+                    Console.WriteLine($"\n总条目数：{data.Data.Total}");
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
+                throw;
+            }
+        }
+
+        static async void GetBookDetail()
+        {
+            Console.WriteLine("正在获取书籍详情...\n");
+            try
+            {
+                var data = await _client.GetBookDetailAsync(55166);
+                if (data.Result.Code == ResultCode.Success)
+                {
+                    WriteBook(data.Data);
+                    if (data.Data.Update != null)
+                    {
+                        var update = data.Data.Update;
+                        Console.WriteLine($"更新信息：\n" +
+                            $"-----\n" +
+                            $"最新章节名：{update.ChapterName}\n" +
+                            $"更新时间：{update.GetUpdateTime():yyyy/MM/dd HH:mm:ss}\n" +
+                            $"-----\n");
+                    }
+                    if (data.Data.Recommend != null)
+                    {
+                        Console.WriteLine("推荐书籍：\n-----");
+                        data.Data.Recommend.ForEach(p => WriteBook(p));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
+            }
+        }
+
+        static async void GetBookChapters()
+        {
+            Console.WriteLine("正在获取书籍目录...\n");
+            try
+            {
+                var data = await _client.GetBookChaptersAsync(55166);
+                if (data.Result.Code == ResultCode.Success)
+                {
+                    Console.WriteLine($"书号：{data.Data.BookId}\n" +
+                        $"章节数：{data.Data.Chapters.Count}\n" +
+                        $"前五章：\n");
+                    int maxCount = 5;
+                    for (int i = 0; i < data.Data.Chapters.Count; i++)
+                    {
+                        
+                        if (i >= maxCount)
+                            break;
+                        var cha = data.Data.Chapters[i];
+                        Console.WriteLine($"· ({cha.Id}){cha.Name}\n");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
+            }
+        }
+
+        static async void GetChapterContent()
+        {
+            Console.WriteLine("正在获取章节内容...\n");
+            try
+            {
+                var data = await _client.DownloadChaptersAsync(55166, 1257207220320452609);
+                if (data.Result.Code == ResultCode.Success)
+                {
+                    var chapter = data.Data.List.First();
+                    Console.WriteLine($"章节名：{chapter.Name}\n" +
+                        $"章节内容：{chapter.Content}");
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandle(ex.Message);
             }
         }
 

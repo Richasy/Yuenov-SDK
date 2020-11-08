@@ -4,7 +4,7 @@ using Yuenov_SDK.Models.Share;
 
 namespace Yuenov_SDK.Models.Response
 {
-    public class SearchBookResponse : PageResponseBase
+    public class BookListPageResponse : PageResponseBase
     {
         /// <summary>
         /// 搜索的结果书籍列表

@@ -4,9 +4,9 @@ using Yuenov_SDK.Models.Discovery;
 
 namespace Yuenov_SDK.Models.Response
 {
-    public class ChannelRankResponse
+    public class SpecialListResponse
     {
-        [JsonProperty("channels")]
-        public List<RankContainer> Channels { get; set; }
+        [JsonProperty("specialList")]
+        public List<SpecialContainer> SpecialList { get; set; }
     }
 }

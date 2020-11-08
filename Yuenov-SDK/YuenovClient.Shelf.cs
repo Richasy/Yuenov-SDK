@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Yuenov_SDK.Models.Response;
 using Yuenov_SDK.Models.Shelf;
@@ -19,7 +18,12 @@ namespace Yuenov_SDK
             if (needCheckItems == null || needCheckItems.Length == 0)
                 throw new ArgumentException("传入的查询不能为空");
 
-            var result = await PostAsync<Response<List<CheckUpdateItem>>>(API_CHECK_UPDATE, needCheckItems);
+            var obj = new
+            {
+                books = needCheckItems
+            };
+
+            var result = await PostAsync<Response<List<CheckUpdateItem>>>(API_CHECK_UPDATE, obj);
             return result;
         }
 
@@ -30,7 +34,7 @@ namespace Yuenov_SDK
         /// <param name="pageNum">请求第几页的数据，最小值为1</param>
         /// <param name="pageSize">请求每页多少条的数据</param>
         /// <returns></returns>
-        public async Task<Response<SearchBookResponse>> SearchBookAsync(string keyword, int pageNum=1,int pageSize = 20)
+        public async Task<Response<BookListPageResponse>> SearchBookAsync(string keyword, int pageNum=1,int pageSize = 20)
         {
             if(string.IsNullOrEmpty(keyword) || pageNum<1 || pageSize<1)
                 throw new ArgumentException("请求参数无效");
@@ -40,7 +44,7 @@ namespace Yuenov_SDK
             dict.Add("pageNum", pageNum.ToString());
             dict.Add("pageSize", pageSize.ToString());
 
-            var result = await GetAsync<Response<SearchBookResponse>>(API_SEARCH_BOOK, dict);
+            var result = await GetAsync<Response<BookListPageResponse>>(API_SEARCH_BOOK, dict);
             return result;
         }
     }
