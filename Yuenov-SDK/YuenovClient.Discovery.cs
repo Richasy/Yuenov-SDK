@@ -6,7 +6,7 @@ using Yuenov.SDK.Models.Response;
 
 namespace Yuenov.SDK
 {
-    public partial class YuenovClient
+    public sealed partial class YuenovClient
     {
         /// <summary>
         /// 获取发现页面

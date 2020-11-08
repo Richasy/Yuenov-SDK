@@ -6,7 +6,7 @@ using Yuenov.SDK.Models.Shelf;
 
 namespace Yuenov.SDK
 {
-    public partial class YuenovClient
+    public sealed partial class YuenovClient
     {
         /// <summary>
         /// 批量检查书籍是否有更新

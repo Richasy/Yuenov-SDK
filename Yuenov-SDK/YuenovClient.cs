@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Yuenov.SDK
 {
-    public partial class YuenovClient : IDisposable
+    public sealed partial class YuenovClient : IDisposable
     {
         private static string _baseUrl;
         private static string _picUrl;

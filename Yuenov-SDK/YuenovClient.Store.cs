@@ -8,7 +8,7 @@ using Yuenov.SDK.Models.Store;
 
 namespace Yuenov.SDK
 {
-    public partial class YuenovClient
+    public sealed partial class YuenovClient
     {
         /// <summary>
         /// 获取某个分类下所有的书籍
@@ -102,7 +102,7 @@ namespace Yuenov.SDK
         /// <returns></returns>
         public async Task<Response<ChapterListResponse>> DownloadChaptersAsync(int bookId, params long[] chapters)
         {
-            if(bookId<1 || chapters.Length==0 || chapters.Any(c=>c<1))
+            if (bookId < 1 || chapters.Length == 0 || chapters.Any(c => c < 1))
                 throw new ArgumentException("请输入有效的参数");
 
             var obj = new
