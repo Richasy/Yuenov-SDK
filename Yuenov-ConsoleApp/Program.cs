@@ -23,12 +23,12 @@ namespace Yuenov_ConsoleApp
             //GetTotalRanks();
             //GetRankDetail();
             //GetEndBooks();
-            //GetSpecialList();
+            GetSpecialList();
             //GetSpecialDetail();
             //GetDiscoveryDetail();
             //GetBookDetail();
             //GetBookChapters();
-            GetChapterContent();
+            //GetChapterContent();
             Console.ReadKey();
         }
 

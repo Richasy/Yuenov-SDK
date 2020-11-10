@@ -51,6 +51,18 @@ namespace Yuenov.SDK
         }
 
         /// <summary>
+        /// 设置请求令牌（用于授权用户免除请求限制）
+        /// </summary>
+        /// <param name="token">令牌</param>
+        public void SetOpenToken(string token)
+        {
+            if (_httpClient != null && !string.IsNullOrEmpty(token))
+            {
+                _httpClient.DefaultRequestHeaders.Add("open_access_token", token);
+            }
+        }
+
+        /// <summary>
         /// 发送POST请求
         /// </summary>
         /// <typeparam name="T">需要转换的目标对象类型</typeparam>
