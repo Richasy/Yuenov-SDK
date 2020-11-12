@@ -1,18 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 using Yuenov.SDK.Enums;
-using Yuenov.SDK.Models.Share;
 
 namespace Yuenov.SDK.Models.Discovery
 {
-    public class DiscoveryContainer
+    public class DiscoveryContainer : BookListContainerBase
     {
-        /// <summary>
-        /// 书籍列表
-        /// </summary>
-        [JsonProperty("bookList")]
-        public List<Book> BookList { get; set; }
-
         /// <summary>
         /// 每个分类的名称
         /// </summary>
