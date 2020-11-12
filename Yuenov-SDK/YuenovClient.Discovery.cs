@@ -14,11 +14,7 @@ namespace Yuenov.SDK
         /// <returns></returns>
         public async Task<Response<DiscoveryPageResponse>> GetDiscoveryPageAsync()
         {
-            var dict = new Dictionary<string, string>();
-            dict.Add("pageNum", "1");
-            dict.Add("pageSize", "1");
-
-            var result = await GetAsync<Response<DiscoveryPageResponse>>(API_DISCOVERY_PAGE, dict);
+            var result = await GetAsync<Response<DiscoveryPageResponse>>(API_DISCOVERY_PAGE);
             return result;
         }
 
@@ -85,11 +81,7 @@ namespace Yuenov.SDK
         /// <returns></returns>
         public async Task<Response<SpecialListResponse>> GetAllSpecialListAsync()
         {
-            var dict = new Dictionary<string, string>();
-            dict.Add("pageNum", "1");
-            dict.Add("pageSize", "1");
-
-            var result = await GetAsync<Response<SpecialListResponse>>(API_SPECIAL_LIST, dict);
+            var result = await GetAsync<Response<SpecialListResponse>>(API_SPECIAL_LIST);
             return result;
         }
 

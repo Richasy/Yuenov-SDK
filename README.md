@@ -50,6 +50,16 @@ var _client = new YuenovClient(17777);
 var _client = new YuenovClient(baseUrl: "http://yuenov.com:15555", pictureUrl: "http://yuenov.com:17777");
 ```
 
+## 令牌设置
+
+阅小说相关服务免费公开了API，但是对IP单位时间内的请求次数进行了限制（10s内请求一次）。如果要解除限制，需要联系服务开发者获取令牌。
+
+当获取令牌后，可以使用如下代码进行令牌设置：
+
+```csharp
+_client.SetOpenToken(yourToken);
+```
+
 ## 图片链接
 
 API请求得到的图片链接实际上是图片在服务器中的路径，并不能够直接使用，需要进行地址拼接。SDK提供了简单的方法用于返回图片链接：

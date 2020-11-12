@@ -35,6 +35,10 @@
         /// </summary>
         Timeout = 1007,
         /// <summary>
+        /// 请求限制（IP在单位时间内的请求次数达到上限）
+        /// </summary>
+        RequestLimit=1009,
+        /// <summary>
         /// 系统出错
         /// </summary>
         SystemError = 9999
