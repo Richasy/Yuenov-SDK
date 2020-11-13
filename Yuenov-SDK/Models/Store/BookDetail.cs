@@ -17,5 +17,11 @@ namespace Yuenov.SDK.Models.Store
         /// </summary>
         [JsonProperty("recommend")]
         public List<Book> Recommend { get; set; }
+
+        /// <summary>
+        /// 总共有多少章节
+        /// </summary>
+        [JsonProperty("chapterNum")]
+        public int ChapterNumber { get; set; }
     }
 }
