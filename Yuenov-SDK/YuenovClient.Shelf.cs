@@ -13,7 +13,7 @@ namespace Yuenov.SDK
         /// </summary>
         /// <param name="needCheckItems"></param>
         /// <returns></returns>
-        public async Task<Response<List<CheckUpdateItem>>> CheckUpdateAsync(params CheckUpdateItem[] needCheckItems)
+        public async Task<Response<UpdateCheckResponse>> CheckUpdateAsync(params CheckUpdateItem[] needCheckItems)
         {
             if (needCheckItems == null || needCheckItems.Length == 0)
                 throw new ArgumentException("传入的查询不能为空");
@@ -23,7 +23,7 @@ namespace Yuenov.SDK
                 books = needCheckItems
             };
 
-            var result = await PostAsync<Response<List<CheckUpdateItem>>>(API_CHECK_UPDATE, obj);
+            var result = await PostAsync<Response<UpdateCheckResponse>>(API_CHECK_UPDATE, obj);
             return result;
         }
 
